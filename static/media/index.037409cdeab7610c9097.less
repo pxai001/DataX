@@ -1,0 +1,53 @@
+@import "../../../style/mixin.less";
+
+.@{prefix}-fade {
+
+    &-enter {
+        opacity: 0;
+    }
+
+    &-enter-active {
+        opacity: 1;
+        transition-property: opacity;
+        .use-var(transition-duration, transition-fade-duration);
+    }
+
+    &-exit {
+        opacity: 1;
+    }
+
+    &-exit-active {
+        opacity: 0;
+        transition-property: opacity;
+        .use-var(transition-duration, transition-fade-duration);
+    }
+
+    &-exit-done {
+        display: none;
+    }
+}
+
+/***************************************************
+ *                                                 *
+ *               Arco Theme Style                  *
+ *                                                 *
+ ***************************************************/
+    & when (@use-dark-mode = 1) {
+    
+  .process-bg-color-with-config,
+  .process-custom-icon-bg-color-with-config {
+    @{arco-dark-mode-selector} & {
+      .use-var(color, dark-steps-process-with-config-item-icon-color);
+      .use-var(color, dark-steps-process-with-config-item-icon-color);
+    }
+  }
+  .wait-custom-icon-bg-color-with-config {
+    @{arco-dark-mode-selector} & {
+      .use-var(background, dark-steps-wait-icon-num-background);
+      .use-var(color, dark-sub-info-font-color);
+      .use-var(background, dark-steps-wait-icon-num-background);
+      .use-var(color, dark-sub-info-font-color);
+    }
+  }
+}
+/********************* End *************************/

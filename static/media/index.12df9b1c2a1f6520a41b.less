@@ -1,0 +1,214 @@
+@import "../../../style/mixin.less";
+
+.@{prefix}-cell {
+    .use-var(color, cell-text-color);
+    .use-var(font-size, cell-font-size);
+    .use-var(margin-left, cell-horizontal-padding);
+    .use-var(padding-right, cell-horizontal-padding);
+
+    &:not(:first-of-type).bordered {
+        .onepx-border-var(top, line-color);
+    }
+
+    &.without-group {
+        .use-var(background-color, cell-background-color);
+        .use-var(padding-left, cell-horizontal-padding);
+        margin-left: 0;
+
+        &.bordered {
+            .onepx-border-var(top, line-color);
+            .onepx-border-var(bottom, line-color);
+        }
+    }
+
+    &-inner {
+        display: flex;
+        align-items: center;
+        .use-var(height, cell-item-height);
+
+        &.has-desc {
+            .use-var(height, cell-item-has-desc-height);
+        }
+    }
+
+    .cell-label {
+        .use-var(color, cell-label-color);
+        .use-var-with-rtl(margin-right, cell-label-gutter);
+    }
+
+    .cell-desc {
+        .use-var(color, cell-desc-color);
+        .use-var(font-size, cell-desc-font-size);
+        .use-var(margin-top, cell-desc-margin-top);
+    }
+
+    .cell-content {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        height: 100%;
+
+        &.has-label {
+            justify-content: flex-end;
+        }
+
+        .cell-text {
+            width: 100%;
+            .set-value-with-rtl(text-align, right);
+            .use-var(font-size, cell-content-font-size);
+            .text-overflow(2);
+        }
+    }
+
+    .cell-label-icon {
+        .use-var-with-rtl(margin-right, cell-label-icon-gutter);
+        font-size: 0;
+        .@{prefix}-icon {
+            line-height: initial;
+            .use-var(font-size, cell-label-icon-font-size);
+            .use-var(color, cell-label-icon-color);
+        }
+    }
+
+    .cell-arrow-icon {
+        [dir="rtl"] & {
+            transform: scale(-1);
+        }
+        .use-var-with-rtl(margin-left, cell-arrow-gutter);
+        font-size: 0;
+        .@{prefix}-icon {
+            .use-var(font-size, cell-arrow-font-size);
+            .use-var(color, cell-arrow-color);
+        }
+
+        .arrow-icon-svg {
+            .rem(width, 8);
+
+            path {
+                .use-var(fill, cell-arrow-color);
+            }
+        }
+    }
+
+    .@{prefix}-input-wrap {
+        .set-prop-with-rtl(padding-left, 0, {
+            .use-var(padding-left, input-horizontal-padding);
+        });
+    }
+}
+
+.@{prefix}-cell-group {
+
+    .cell-group-header,
+    .cell-group-footer {
+        .use-var(color, cell-text-color);
+        .use-var(font-size, cell-extra-font-size);
+        .use-var(line-height, cell-extra-line-height);
+        .use-var(padding, cell-extra-padding);
+    }
+
+    .cell-group-body {
+        .use-var(background-color, cell-background-color);
+
+        &.bordered {
+            .onepx-border-var(top, line-color);
+            .onepx-border-var(bottom, line-color);
+        }
+    }
+}
+
+/***************************************************
+ *                                                 *
+ *               Arco Theme Style                  *
+ *                                                 *
+ ***************************************************/
+    & when (@use-dark-mode = 1) {
+    
+  .process-bg-color-with-config,
+  .process-custom-icon-bg-color-with-config {
+    @{arco-dark-mode-selector} & {
+      .use-var(color, dark-steps-process-with-config-item-icon-color);
+      .use-var(color, dark-steps-process-with-config-item-icon-color);
+    }
+  }
+  .wait-custom-icon-bg-color-with-config {
+    @{arco-dark-mode-selector} & {
+      .use-var(background, dark-steps-wait-icon-num-background);
+      .use-var(color, dark-sub-info-font-color);
+      .use-var(background, dark-steps-wait-icon-num-background);
+      .use-var(color, dark-sub-info-font-color);
+    }
+  }
+  .@{prefix}-cell {
+    @{arco-dark-mode-selector} & {
+      .use-var(color, dark-cell-text-color);
+    }
+    &:not(:first-of-type).bordered {
+      @{arco-dark-mode-selector} & {
+        .onepx-border-var(top, dark-line-color);
+      }
+    }
+    &.without-group {
+      @{arco-dark-mode-selector} & {
+        .use-var(background-color, dark-cell-background-color);
+      }
+      &.bordered {
+        @{arco-dark-mode-selector} & {
+          .onepx-border-var(top, dark-line-color);
+          .onepx-border-var(bottom, dark-line-color);
+        }
+      }
+    }
+    .cell-label {
+      @{arco-dark-mode-selector} & {
+        .use-var(color, dark-cell-label-color);
+      }
+    }
+    .cell-desc {
+      @{arco-dark-mode-selector} & {
+        .use-var(color, dark-cell-desc-color);
+      }
+    }
+    .cell-label-icon {
+      .@{prefix}-icon {
+        @{arco-dark-mode-selector} & {
+          .use-var(color, dark-cell-label-icon-color);
+        }
+      }
+    }
+    .cell-arrow-icon {
+      .@{prefix}-icon {
+        @{arco-dark-mode-selector} & {
+          .use-var(color, dark-cell-arrow-color);
+        }
+      }
+      .arrow-icon-svg {
+        path {
+          @{arco-dark-mode-selector} & {
+            .use-var(fill, dark-cell-arrow-color);
+          }
+        }
+      }
+    }
+  }
+  .@{prefix}-cell-group {
+    .cell-group-header,
+    .cell-group-footer {
+      @{arco-dark-mode-selector} & {
+        .use-var(color, dark-cell-text-color);
+      }
+    }
+    .cell-group-body {
+      @{arco-dark-mode-selector} & {
+        .use-var(background-color, dark-cell-background-color);
+      }
+      &.bordered {
+        @{arco-dark-mode-selector} & {
+          .onepx-border-var(top, dark-line-color);
+          .onepx-border-var(bottom, dark-line-color);
+        }
+      }
+    }
+  }
+}
+/********************* End *************************/

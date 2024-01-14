@@ -1,0 +1,90 @@
+@import '../../../style/mixin.less';
+
+.@{prefix}-notify {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    transition-property: height;
+    .use-var(color, notify-font-color);
+    .use-var(font-size, notify-font-size);
+    &-content {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        left: 0;
+        top: 0;
+        transition-property: transform;
+        .use-var(min-height, notify-min-height);
+    }
+    &-info {
+        background: transparent;
+        .use-var(color, notify-info-font-color);
+    }
+    &-success {
+        .use-var(background, notify-success-background);
+    }
+    &-error {
+        .use-var(background, notify-error-background);
+    }
+    &-warn {
+        .use-var(background, notify-warn-background);
+    }
+    &-content-transition-Y0 {
+        transform: translateY(0);
+    }
+    &-content-transition-Y100 {
+        transform: translateY(-100%);
+    }
+}
+
+/***************************************************
+ *                                                 *
+ *               Arco Theme Style                  *
+ *                                                 *
+ ***************************************************/
+    & when (@use-dark-mode = 1) {
+    
+  .process-bg-color-with-config,
+  .process-custom-icon-bg-color-with-config {
+    @{arco-dark-mode-selector} & {
+      .use-var(color, dark-steps-process-with-config-item-icon-color);
+      .use-var(color, dark-steps-process-with-config-item-icon-color);
+    }
+  }
+  .wait-custom-icon-bg-color-with-config {
+    @{arco-dark-mode-selector} & {
+      .use-var(background, dark-steps-wait-icon-num-background);
+      .use-var(color, dark-sub-info-font-color);
+      .use-var(background, dark-steps-wait-icon-num-background);
+      .use-var(color, dark-sub-info-font-color);
+    }
+  }
+  .@{prefix}-notify {
+    @{arco-dark-mode-selector} & {
+      .use-var(color, dark-notify-font-color);
+    }
+    &-info {
+      @{arco-dark-mode-selector} & {
+        .use-var(color, dark-notify-info-font-color);
+      }
+    }
+    &-success {
+      @{arco-dark-mode-selector} & {
+        .use-var(background, dark-notify-success-background);
+      }
+    }
+    &-error {
+      @{arco-dark-mode-selector} & {
+        .use-var(background, dark-notify-error-background);
+      }
+    }
+    &-warn {
+      @{arco-dark-mode-selector} & {
+        .use-var(background, dark-notify-warn-background);
+      }
+    }
+  }
+}
+/********************* End *************************/

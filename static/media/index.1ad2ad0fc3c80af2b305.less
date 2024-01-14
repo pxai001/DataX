@@ -1,0 +1,66 @@
+@import "../../../style/mixin.less";
+
+.@{prefix}-swipe-load {
+    position: relative;
+    display: inline-flex;
+    width: 100%;
+
+    .@{prefix}-list-area {
+        position: relative;
+        width: 100%;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
+
+    .@{prefix}-loading-area {
+        .use-var(background-color, swipe-load-label-background);
+        margin-top: 0;
+        .use-var(border-radius, swipe-load-label-border-radius);
+
+        .@{prefix}-loading-label {
+            .use-var(margin-left, swipe-load-label-text-margin-left);
+            .use-var(width, swipe-load-label-text-width);
+            .use-var(color, swipe-load-label-text-color);
+            .use-var(font-size, swipe-load-label-text-font-size);
+        }
+    }
+}
+
+/***************************************************
+ *                                                 *
+ *               Arco Theme Style                  *
+ *                                                 *
+ ***************************************************/
+    & when (@use-dark-mode = 1) {
+    
+  .process-bg-color-with-config,
+  .process-custom-icon-bg-color-with-config {
+    @{arco-dark-mode-selector} & {
+      .use-var(color, dark-steps-process-with-config-item-icon-color);
+      .use-var(color, dark-steps-process-with-config-item-icon-color);
+    }
+  }
+  .wait-custom-icon-bg-color-with-config {
+    @{arco-dark-mode-selector} & {
+      .use-var(background, dark-steps-wait-icon-num-background);
+      .use-var(color, dark-sub-info-font-color);
+      .use-var(background, dark-steps-wait-icon-num-background);
+      .use-var(color, dark-sub-info-font-color);
+    }
+  }
+  .@{prefix}-swipe-load {
+    .@{prefix}-loading-area {
+      @{arco-dark-mode-selector} & {
+        .use-var(background-color, dark-swipe-load-label-background);
+      }
+      .@{prefix}-loading-label {
+        @{arco-dark-mode-selector} & {
+          .use-var(color, dark-swipe-load-label-text-color);
+        }
+      }
+    }
+  }
+}
+/********************* End *************************/

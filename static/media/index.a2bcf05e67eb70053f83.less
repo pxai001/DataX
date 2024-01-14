@@ -1,0 +1,407 @@
+@import "../../../style/mixin.less";
+
+.@{prefix}-steps {
+    display: flex;
+    .use-var(padding, steps-padding);
+
+    &-item {
+        position: relative;
+        display: flex;
+        flex: 1;
+
+        &.horizontal {
+            flex-direction: column;
+        }
+
+        &-align-center {
+            align-items: center;
+        }
+
+        &-align-start {
+            align-items: flex-start;
+        }
+
+        &-align-center.vertical {
+            .use-var(padding-bottom, steps-vertical-content-padding-bottom);
+        }
+
+        &:first-child &-tail::before,
+        &:last-child &-tail::after {
+            visibility: hidden;
+        }
+
+        &-tail {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .horizontal & {
+                width: 100%;
+                .use-var(height, steps-icon-height);
+
+                &::before,
+                &::after {
+                    .use-var(height, steps-tail-standard-size);
+                }
+
+                &-align-start {
+                    .use-var(left, steps-tail-horizontal-left);
+                    .use-var(padding, steps-tail-horizontal-padding);
+
+                    &::after {
+                        content: "";
+                        width: 100%;
+                        .use-var(border-radius, steps-tail-border-radius);
+                    }
+                }
+
+                &-align-center {
+                    &::before,
+                    &::after {
+                        content: "";
+                        width: 50%;
+                    }
+                    &::before {
+                        .use-var(margin-right, steps-tail-horizontal-gutter);
+                        .use-var(border-top-right-radius, steps-tail-border-radius);
+                        .use-var(border-bottom-right-radius, steps-tail-border-radius);
+                    }
+                    &::after {
+                        .use-var(margin-left, steps-tail-horizontal-gutter);
+                        .use-var(border-top-left-radius, steps-tail-border-radius);
+                        .use-var(border-bottom-left-radius, steps-tail-border-radius);
+                    }
+                }
+            }
+
+            .vertical & {
+                height: 100%;
+                .use-var(width, steps-icon-width);
+                flex-direction: column;
+
+                &::before,
+                &::after {
+                    .use-var(width, steps-tail-standard-size);
+                }
+
+                &-align-start {
+                    .use-var(top, steps-tail-vertical-top);
+                    .use-var(padding, steps-tail-vertical-padding);
+
+                    &::after {
+                        content: "";
+                        height: 100%;
+                        .use-var(border-radius, steps-tail-border-radius);
+                    }
+                }
+
+                &-align-center {
+                    &::before,
+                    &::after {
+                        content: "";
+                        height: 50%;
+                    }
+                    &::before {
+                        .use-var(margin-bottom, steps-tail-vertical-gutter);
+                        .use-var(border-bottom-left-radius, steps-tail-border-radius);
+                        .use-var(border-bottom-right-radius, steps-tail-border-radius);
+                    }
+                    &::after {
+                        .use-var(margin-top, steps-tail-vertical-gutter);
+                        .use-var(border-top-left-radius, steps-tail-border-radius);
+                        .use-var(border-top-right-radius, steps-tail-border-radius);
+                    }
+                }
+            }
+
+            &::after,
+            &::before {
+                display: inline-block;
+                .use-var(background, steps-tail-standard-background);
+            }
+
+            &-status-finish::before,
+            &-status-finish::after,
+            &-align-center&-status-process::before,
+            &-align-center&-status-error::before {
+                .use-var(background, steps-tail-finish-background);
+            }
+        }
+
+        &-custom-icon,
+        &-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            .use-var(width, steps-icon-width);
+            .use-var(height, steps-icon-height);
+        }
+
+        &-icon {
+            border-radius: 50%;
+
+            .number.finish & {
+                .use-var(background, steps-finish-icon-num-background);
+            }
+
+            .number.process & {
+                .use-var(background, steps-process-icon-num-background);
+            }
+
+            .number.wait & {
+                .use-var(background, steps-wait-icon-num-background);
+            }
+
+            .number.error & {
+                .use-var(background, steps-error-icon-num-background);
+            }
+
+            svg {
+                .use-var(font-size, steps-icon-svg-standard-font-size);
+
+                .finish & {
+                    .use-var(color, steps-finish-icon-svg-color);
+                }
+
+                .error & {
+                    .use-var(color, steps-error-icon-svg-color);
+                    .use-var(font-size, steps-error-icon-svg-font-size);
+                }
+            }
+
+            &-num {
+                .use-var(font-size, steps-icon-num-font-size);
+                .use-var(line-height, steps-icon-num-line-height);
+                .use-var(color, steps-icon-num-color);
+                .text-medium();
+
+                .process & {
+                    .use-var(color, steps-process-icon-num-color);
+                }
+            }
+
+            &-dot {
+                position: relative;
+                display: inline-block;
+                .use-var(width, steps-dot-width);
+                .use-var(height, steps-dot-height);
+                border-radius: 50%;
+                .use-var(border-width, steps-dot-border-width);
+                border-style: solid;
+
+                .finish & {
+                    .use-var(border-color, steps-finish-dot-border-color);
+                }
+
+                .wait & {
+                    .use-var(border-color, steps-wait-dot-border-color);
+                }
+
+                .process & {
+                    border: none;
+                    .use-var(background, steps-process-dot-background);
+                }
+            }
+        }
+
+        &-content {
+
+            .horizontal & {
+                .use-var(margin-top, steps-horizontal-content-margin-top);
+                &-align-center {
+                    text-align: center;
+                }
+            }
+
+            .vertical & {
+                .use-var(margin-left, steps-vertical-content-margin-left);
+                flex: 1;
+
+                &-align-start {
+                    .use-var(padding-bottom, steps-vertical-content-padding-bottom);
+                }
+            }
+        }
+
+        &-title {
+            .use-var(font-size, steps-title-font-size);
+            .use-var(line-height, steps-title-line-height);
+
+            .finish & {
+                .use-var(color, steps-finish-title-color);
+            }
+
+            .error & {
+                .use-var(color, steps-error-title-color);
+            }
+
+            .process & {
+                .use-var(color, steps-process-title-color);
+                font-weight: 500;
+            }
+
+            .wait & {
+                .use-var(color, steps-wait-title-color);
+            }
+        }
+
+        &-description {
+            .use-var(font-size, steps-description-font-size);
+            .use-var(line-height, steps-description-line-height);
+            .use-var(color, steps-description-color);
+
+            .wait & {
+                .use-var(color, steps-wait-description-color);
+            }
+
+            .vertical & {
+                .use-var(margin-top, steps-description-margin-top);
+            }
+        }
+    }
+
+    &.vertical {
+        flex-direction: column;
+        .use-var(padding-bottom, steps-vertical-padding-bottom);
+        .use-var(padding-left, steps-vertical-padding-left);
+    }
+}
+
+/***************************************************
+ *                                                 *
+ *               Arco Theme Style                  *
+ *                                                 *
+ ***************************************************/
+    & when (@use-dark-mode = 1) {
+    
+  .process-bg-color-with-config,
+  .process-custom-icon-bg-color-with-config {
+    @{arco-dark-mode-selector} & {
+      .use-var(color, dark-steps-process-with-config-item-icon-color);
+      .use-var(color, dark-steps-process-with-config-item-icon-color);
+    }
+  }
+  .wait-custom-icon-bg-color-with-config {
+    @{arco-dark-mode-selector} & {
+      .use-var(background, dark-steps-wait-icon-num-background);
+      .use-var(color, dark-sub-info-font-color);
+      .use-var(background, dark-steps-wait-icon-num-background);
+      .use-var(color, dark-sub-info-font-color);
+    }
+  }
+  .@{prefix}-steps {
+    &-item {
+      &-tail {
+        &::after,
+        &::before {
+          @{arco-dark-mode-selector} & {
+            .use-var(background, dark-steps-tail-standard-background);
+          }
+        }
+        &-status-finish::before,
+        &-status-finish::after,
+        &-align-center&-status-process::before,
+        &-align-center&-status-error::before {
+          @{arco-dark-mode-selector} & {
+            .use-var(background, dark-steps-tail-finish-background);
+          }
+        }
+      }
+      &-icon {
+        .number.finish & {
+          @{arco-dark-mode-selector} & {
+            .use-var(background, dark-steps-finish-icon-num-background);
+          }
+        }
+        .number.process & {
+          @{arco-dark-mode-selector} & {
+            .use-var(background, dark-steps-process-icon-num-background);
+          }
+        }
+        .number.wait & {
+          @{arco-dark-mode-selector} & {
+            .use-var(background, dark-steps-wait-icon-num-background);
+          }
+        }
+        .number.error & {
+          @{arco-dark-mode-selector} & {
+            .use-var(background, dark-steps-error-icon-num-background);
+          }
+        }
+        svg {
+          .finish & {
+            @{arco-dark-mode-selector} & {
+              .use-var(color, dark-steps-finish-icon-svg-color);
+            }
+          }
+          .error & {
+            @{arco-dark-mode-selector} & {
+              .use-var(color, dark-steps-error-icon-svg-color);
+            }
+          }
+        }
+        &-num {
+          @{arco-dark-mode-selector} & {
+            .use-var(color, dark-steps-icon-num-color);
+          }
+          .process & {
+            @{arco-dark-mode-selector} & {
+              .use-var(color, dark-steps-process-icon-num-color);
+            }
+          }
+        }
+        &-dot {
+          .finish & {
+            @{arco-dark-mode-selector} & {
+              .use-var(border-color, dark-steps-finish-dot-border-color);
+            }
+          }
+          .wait & {
+            @{arco-dark-mode-selector} & {
+              .use-var(border-color, dark-steps-wait-dot-border-color);
+            }
+          }
+          .process & {
+            @{arco-dark-mode-selector} & {
+              .use-var(background, dark-steps-process-dot-background);
+            }
+          }
+        }
+      }
+      &-title {
+        .finish & {
+          @{arco-dark-mode-selector} & {
+            .use-var(color, dark-steps-finish-title-color);
+          }
+        }
+        .error & {
+          @{arco-dark-mode-selector} & {
+            .use-var(color, dark-steps-error-title-color);
+          }
+        }
+        .process & {
+          @{arco-dark-mode-selector} & {
+            .use-var(color, dark-steps-process-title-color);
+          }
+        }
+        .wait & {
+          @{arco-dark-mode-selector} & {
+            .use-var(color, dark-steps-wait-title-color);
+          }
+        }
+      }
+      &-description {
+        @{arco-dark-mode-selector} & {
+          .use-var(color, dark-steps-description-color);
+        }
+        .wait & {
+          @{arco-dark-mode-selector} & {
+            .use-var(color, dark-steps-wait-description-color);
+          }
+        }
+      }
+    }
+  }
+}
+/********************* End *************************/

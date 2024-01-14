@@ -1,0 +1,119 @@
+@import "../../../style/mixin.less";
+
+.@{prefix}-checkbox {
+    display: inline-flex;
+    align-items: center;
+
+    .checkbox-icon {
+        display: inline-flex;
+        align-items: center;
+        .use-var(font-size, checkbox-icon-font-size);
+        .use-var(color, checkbox-icon-color);
+
+        &.checked {
+            .use-var(color, checkbox-icon-checked-color);
+        }
+
+        &.disabled {
+            .use-var(color, checkbox-icon-disabled-color);
+        }
+
+        &.checked.disabled {
+            .use-var(color, checkbox-icon-checked-disabled-color);
+        }
+
+        .@{prefix}-icon-circle-disabled path {
+            .use-var(stroke, line-color);
+        }
+    }
+
+    .checkbox-text {
+        .use-var(font-size, checkbox-text-font-size);
+        .use-var(color, font-color);
+    }
+
+    .checkbox-icon + .checkbox-text {
+        .use-var-with-rtl(margin-left, checkbox-icon-margin-right);
+    }
+
+    &.disabled .checkbox-text {
+        .use-var(opacity, checkbox-text-disabled-opacity);
+    }
+
+    &.block {
+        width: 100%;
+    }
+
+    &.justify {
+        width: 100%;
+        justify-content: space-between;
+    }
+}
+
+.@{prefix}-checkbox-group {
+    .@{prefix}-checkbox:not(:last-child) {
+        .use-var-with-rtl(margin-right, checkbox-group-gutter);
+
+        &.block,
+        &.justify {
+            .set-prop-with-rtl(margin-right, 0);
+        }
+    }
+}
+
+/***************************************************
+ *                                                 *
+ *               Arco Theme Style                  *
+ *                                                 *
+ ***************************************************/
+    & when (@use-dark-mode = 1) {
+    
+  .process-bg-color-with-config,
+  .process-custom-icon-bg-color-with-config {
+    @{arco-dark-mode-selector} & {
+      .use-var(color, dark-steps-process-with-config-item-icon-color);
+      .use-var(color, dark-steps-process-with-config-item-icon-color);
+    }
+  }
+  .wait-custom-icon-bg-color-with-config {
+    @{arco-dark-mode-selector} & {
+      .use-var(background, dark-steps-wait-icon-num-background);
+      .use-var(color, dark-sub-info-font-color);
+      .use-var(background, dark-steps-wait-icon-num-background);
+      .use-var(color, dark-sub-info-font-color);
+    }
+  }
+  .@{prefix}-checkbox {
+    .checkbox-icon {
+      @{arco-dark-mode-selector} & {
+        .use-var(color, dark-checkbox-icon-color);
+      }
+      &.checked {
+        @{arco-dark-mode-selector} & {
+          .use-var(color, dark-checkbox-icon-checked-color);
+        }
+      }
+      &.disabled {
+        @{arco-dark-mode-selector} & {
+          .use-var(color, dark-checkbox-icon-disabled-color);
+        }
+      }
+      &.checked.disabled {
+        @{arco-dark-mode-selector} & {
+          .use-var(color, dark-checkbox-icon-checked-disabled-color);
+        }
+      }
+      .@{prefix}-icon-circle-disabled path {
+        @{arco-dark-mode-selector} & {
+          .use-var(stroke, dark-line-color);
+        }
+      }
+    }
+    .checkbox-text {
+      @{arco-dark-mode-selector} & {
+        .use-var(color, dark-font-color);
+      }
+    }
+  }
+}
+/********************* End *************************/

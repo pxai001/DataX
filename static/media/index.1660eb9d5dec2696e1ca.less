@@ -1,0 +1,217 @@
+@import "../../../style/mixin.less";
+
+.@{prefix}-switch {
+    position: relative;
+    display: inline-block;
+    .use-var(transition, switch-inner-transition);
+    @keyframes changDeg {
+
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    &.type-android {
+        .use-var(width, switch-android-width);
+        .use-var(height, switch-android-height);
+        .use-var(padding, switch-android-padding);
+        padding-bottom: 0;
+        .use-var(background-color, switch-android-background);
+
+        &.fully {
+            .use-var(border-radius, switch-android-fully-border-radius);
+        }
+
+        &.semi {
+            .use-var(border-radius, switch-android-semi-border-radius);
+        }
+
+        &.checked {
+            .use-var(background-color, switch-android-checked-background);
+            .@{prefix}-switch-text {
+                .set-prop-with-rtl(right, auto);
+                .use-var-with-rtl(left, switch-android-text-gap-size);
+            }
+            .@{prefix}-switch-inner {
+                .use-var(transform, switch-android-checked-inner-transform);
+                [dir="rtl"] & {
+                    .use-var(transform, switch-android-checked-inner-transform, "rotate(180deg)");
+                }
+            }
+        }
+        .@{prefix}-switch-inner {
+            .use-var(width, switch-android-inner-diameter-size);
+            .use-var(height, switch-android-inner-diameter-size);
+            .use-var(box-shadow, switch-android-inner-box-shadow);
+            [dir="rtl"] & {
+                transform: rotate(180deg);
+            }
+        }
+
+        &.disabled {
+
+            &.checked {
+                .use-var(background-color, switch-android-disabled-checked-background);
+            }
+
+            &:not(.checked) {
+                .use-var(background-color, switch-android-disabled-background);
+            }
+        }
+        .@{prefix}-switch-text {
+            .use-var(font-size, switch-android-text-font-size);
+            .use-var-with-rtl(right, switch-android-text-gap-size);
+        }
+    }
+
+    &.type-ios {
+        .use-var(width, switch-ios-width);
+        .use-var(height, switch-ios-height);
+        .use-var(padding, switch-ios-padding);
+        padding-bottom: 0;
+        .use-var(background-color, switch-ios-background);
+
+        &.fully {
+            .use-var(border-radius, switch-ios-fully-border-radius);
+        }
+
+        &.semi {
+            .use-var(border-radius, switch-ios-semi-border-radius);
+        }
+
+        &.checked {
+            .use-var(background-color, switch-ios-checked-background);
+            .@{prefix}-switch-text {
+                .set-prop-with-rtl(right, auto);
+                .use-var-with-rtl(left, switch-ios-text-gap-size);
+            }
+            .@{prefix}-switch-inner {
+                .use-var(transform, switch-ios-checked-inner-transform);
+                .use-var(box-shadow, switch-ios-inner-box-shadow);
+                [dir="rtl"] & {
+                    .use-var(transform, switch-ios-checked-inner-transform, "rotate(180deg)");
+                }
+            }
+        }
+
+        &.disabled.checked {
+            .use-var(opacity, switch-ios-disabled-checked-opacity);
+        }
+        .@{prefix}-switch-text {
+            .use-var(font-size, switch-ios-text-font-size);
+            .use-var-with-rtl(right, switch-ios-text-gap-size);
+        }
+        .@{prefix}-switch-inner {
+            .use-var(width, switch-ios-inner-diameter-size);
+            .use-var(height, switch-ios-inner-diameter-size);
+            .onepx-border-var(all, switch-ios-inner-border-color, 50%);
+            [dir="rtl"] & {
+                transform: rotate(180deg);
+            }
+        }
+
+        &.disabled {
+
+            &.checked {
+                .use-var(background-color, switch-ios-disabled-checked-background);
+            }
+
+            &:not(.checked) {
+                .use-var(background-color, switch-ios-disabled-background);
+            }
+        }
+    }
+
+    &-text {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        .use-var(color, switch-text-color);
+    }
+
+    &.checked &-text {
+        .use-var(color, switch-text-checked-color);
+    }
+
+    &-inner {
+        position: relative;
+        .set-prop-with-rtl(left, 0);
+        top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .use-var(background-color, switch-inner-background);
+        .use-var(transition, switch-inner-transition);
+
+        .fully & {
+            .use-var(border-radius, switch-inner-fully-border-radius);
+        }
+
+        .semi & {
+            .use-var(border-radius, switch-inner-semi-border-radius);
+        }
+    }
+}
+
+/***************************************************
+ *                                                 *
+ *               Arco Theme Style                  *
+ *                                                 *
+ ***************************************************/
+    & when (@use-dark-mode = 1) {
+    
+  .process-bg-color-with-config,
+  .process-custom-icon-bg-color-with-config {
+    @{arco-dark-mode-selector} & {
+      .use-var(color, dark-steps-process-with-config-item-icon-color);
+      .use-var(color, dark-steps-process-with-config-item-icon-color);
+    }
+  }
+  .wait-custom-icon-bg-color-with-config {
+    @{arco-dark-mode-selector} & {
+      .use-var(background, dark-steps-wait-icon-num-background);
+      .use-var(color, dark-sub-info-font-color);
+      .use-var(background, dark-steps-wait-icon-num-background);
+      .use-var(color, dark-sub-info-font-color);
+    }
+  }
+  .@{prefix}-switch {
+    &.type-android {
+      @{arco-dark-mode-selector} & {
+        .use-var(background-color, dark-switch-android-background);
+      }
+      &.checked {
+        @{arco-dark-mode-selector} & {
+          .use-var(background-color, dark-switch-android-checked-background);
+        }
+      }
+      &.disabled {
+        &.checked {
+          @{arco-dark-mode-selector} & {
+            .use-var(background-color, dark-switch-android-disabled-checked-background);
+          }
+        }
+        &:not(.checked) {
+          @{arco-dark-mode-selector} & {
+            .use-var(background-color, dark-switch-android-disabled-background);
+          }
+        }
+      }
+    }
+    &-text {
+      @{arco-dark-mode-selector} & {
+        .use-var(color, dark-switch-text-color);
+      }
+    }
+    &.checked &-text {
+      @{arco-dark-mode-selector} & {
+        .use-var(color, dark-switch-text-checked-color);
+      }
+    }
+  }
+}
+/********************* End *************************/

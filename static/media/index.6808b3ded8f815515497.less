@@ -1,0 +1,195 @@
+@import "../../../style/mixin.less";
+
+.@{prefix}-input-container {
+    width: 100%;
+    .use-var(color, font-color);
+    position: relative;
+    .@{prefix}-input-label {
+        .use-var(min-width, input-label-min-width);
+    }
+}
+
+.@{prefix}-input-label {
+
+    &.required::before {
+        content: "* ";
+        .use-var(color, danger-color);
+    }
+    padding-top: 1PX;
+
+    .disabled & {
+        .use-var(color, input-disabled-color);
+    }
+}
+
+.@{prefix}-input-wrap {
+    position: relative;
+    .use-var(height, input-height);
+    .use-var(padding, input-horizontal-padding, 0);
+    display: flex;
+    align-items: center;
+
+    textarea,
+    input {
+        flex: 1;
+        background: transparent;
+
+        &:disabled {
+            .use-var(color, input-disabled-color);
+            // reset for ios
+            .use-var(-webkit-text-fill-color, input-disabled-color);
+            opacity: 1;
+        }
+    }
+
+    &.textarea {
+        height: auto;
+        align-items: flex-start;
+        .use-var(padding, textarea-padding);
+
+        &.has-stat {
+            .use-var(padding, textarea-has-stat-padding);
+        }
+    }
+
+    &.border {
+
+        &-all {
+            .hairline-var(line-color);
+        }
+
+        &-half {
+            .hairline-var(line-color, top);
+            .hairline-var(line-color, bottom);
+        }
+
+        &-bottom {
+            .hairline-var(line-color, bottom);
+        }
+    }
+}
+
+.@{prefix}-input-prefix, .@{prefix}-input-suffix, .@{prefix}-input-clear {
+    .use-var(font-size, input-text-font-size);
+    .use-var(line-height, input-text-line-height);
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+.@{prefix}-input-prefix {
+    .use-var-with-rtl(padding-right, input-label-gutter);
+}
+.@{prefix}-input-clear,
+.@{prefix}-input-suffix {
+    .use-var-with-rtl(padding-left, input-horizontal-padding);
+}
+.@{prefix}-input-clear {
+    .use-var(color, input-clear-icon-color);
+    .use-var(font-size, input-clear-icon-font-size);
+}
+
+.@{prefix}-input {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    .use-var(font-size, input-text-font-size);
+    .use-var(line-height, input-text-line-height);
+    .use-var(caret-color, input-caret-color);
+    .use-var(padding, input-vertical-padding, "", 0);
+    .use-var(color, font-color);
+
+    &::placeholder {
+        .use-var(color, input-placeholder-color);
+    }
+
+    &::-webkit-search-cancel-button {
+        display: none;
+    }
+}
+
+/***************************************************
+ *                                                 *
+ *               Arco Theme Style                  *
+ *                                                 *
+ ***************************************************/
+    & when (@use-dark-mode = 1) {
+    
+  .process-bg-color-with-config,
+  .process-custom-icon-bg-color-with-config {
+    @{arco-dark-mode-selector} & {
+      .use-var(color, dark-steps-process-with-config-item-icon-color);
+      .use-var(color, dark-steps-process-with-config-item-icon-color);
+    }
+  }
+  .wait-custom-icon-bg-color-with-config {
+    @{arco-dark-mode-selector} & {
+      .use-var(background, dark-steps-wait-icon-num-background);
+      .use-var(color, dark-sub-info-font-color);
+      .use-var(background, dark-steps-wait-icon-num-background);
+      .use-var(color, dark-sub-info-font-color);
+    }
+  }
+  .@{prefix}-input-container {
+    @{arco-dark-mode-selector} & {
+      .use-var(color, dark-font-color);
+    }
+  }
+  .@{prefix}-input-label {
+    &.required::before {
+      @{arco-dark-mode-selector} & {
+        .use-var(color, dark-danger-color);
+      }
+    }
+    .disabled & {
+      @{arco-dark-mode-selector} & {
+        .use-var(color, dark-input-disabled-color);
+      }
+    }
+  }
+  .@{prefix}-input-wrap {
+    textarea,
+    input {
+      &:disabled {
+        @{arco-dark-mode-selector} & {
+          .use-var(color, dark-input-disabled-color);
+          .use-var(-webkit-text-fill-color, dark-input-disabled-color);
+        }
+      }
+    }
+    &.border {
+      &-all {
+        @{arco-dark-mode-selector} & {
+          .hairline-var(dark-line-color);
+        }
+      }
+      &-half {
+        @{arco-dark-mode-selector} & {
+          .hairline-var(dark-line-color, top);
+          .hairline-var(dark-line-color, bottom);
+        }
+      }
+      &-bottom {
+        @{arco-dark-mode-selector} & {
+          .hairline-var(dark-line-color, bottom);
+        }
+      }
+    }
+  }
+  .@{prefix}-input-clear {
+    @{arco-dark-mode-selector} & {
+      .use-var(color, dark-input-clear-icon-color);
+    }
+  }
+  .@{prefix}-input {
+    @{arco-dark-mode-selector} & {
+      .use-var(caret-color, dark-input-caret-color);
+      .use-var(color, dark-font-color);
+    }
+    &::placeholder {
+      @{arco-dark-mode-selector} & {
+        .use-var(color, dark-input-placeholder-color);
+      }
+    }
+  }
+}
+/********************* End *************************/
